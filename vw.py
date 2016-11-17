@@ -32,3 +32,9 @@ class MyFrame(wx.Frame):
         except:
             #wikipedia
             print wikipedia.summary(input)
+
+
+if __name__ == "__main__":
+    app = wx.App(True)
+    frame = MyFrame()
+    app.MainLoop()

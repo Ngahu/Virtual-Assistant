@@ -2,6 +2,7 @@ import wx
 import wikipedia
 import wolframalpha
 from espeak import espeak
+import speech_recognition as sr
 
 espeak.syth("Welcome")
 class MyFrame(wx.Frame):
@@ -26,6 +27,16 @@ class MyFrame(wx.Frame):
     def OnEnter(self,event):
         input = self.txt.GetValue()
         input = input.lower()
+        if input == '':
+            r = sr.Recognizer()
+            with sr.Microphone() as source:
+                audio = r.listen(source)
+            try:
+                self.txt.SetValue(r.recognize_google(audio))
+            except sr.UnknownValueError:
+                print ("GOogle Speech Recognision could not understand")
+            except sr.RequestError as e:
+                print("Could not rewuest results from Google Soeech Recognition Service; {0}".format(e))
         try:
             #wolframalpha
             app_id = ""

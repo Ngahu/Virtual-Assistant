@@ -18,3 +18,17 @@ class MyFrame(wx.Frame):
         my_sizer.Add(self.txt,0,wx.ALL,5)
         panel.SetSizer(my_sizer)
         self.Show()
+
+    def OnEnter(self,event):
+        input = self.txt.GetValue()
+        input = input.lower()
+        try:
+            #wolframalpha
+            app_id = ""
+            client = wolframalpha.Client(app_id)
+            res = client.query(input)
+            answer = next(res.results).text
+            print answer
+        except:
+            #wikipedia
+            print wikipedia.summary(input)

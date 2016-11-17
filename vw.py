@@ -11,3 +11,10 @@ class MyFrame(wx.Frame):
         my_sizer = wx.BoxSizer(wx.VERTICAL)
         lbl = wx.StaticText(panel,
         label = "Hello I am VA. How can i help you?")
+        my_sizer.Add(lbl,0,wx.All,5)
+        self.txt = wx.TextCtrl(panel,style=wx.TE_PROCESS_ENTER,size=(400,30))
+        self.txt.SetFocus()
+        self.txt.Bind(wx.EVT_ENTER, self.OnEnter)
+        my_sizer.Add(self.txt,0,wx.ALL,5)
+        panel.SetSizer(my_sizer)
+        self.Show()

@@ -1,5 +1,9 @@
 import wx
+import wikipedia
+import wolframalpha
+from espeak import espeak
 
+espeak.syth("Welcome")
 class MyFrame(wx.Frame):
     def __init__(self):
         wx.Frame.__init__(self,None,
@@ -29,8 +33,12 @@ class MyFrame(wx.Frame):
             res = client.query(input)
             answer = next(res.results).text
             print answer
+            espeak.synth("The answer is"+answer)
         except:
             #wikipedia
+            input = input.split('')
+            input = " ".join(input[2:])
+            espeak.synth("Searched for" +input)
             print wikipedia.summary(input)
 
 

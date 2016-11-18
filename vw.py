@@ -36,21 +36,23 @@ class MyFrame(wx.Frame):
             except sr.UnknownValueError:
                 print ("GOogle Speech Recognision could not understand")
             except sr.RequestError as e:
-                print("Could not rewuest results from Google Soeech Recognition Service; {0}".format(e))
-        try:
-            #wolframalpha
-            app_id = ""
-            client = wolframalpha.Client(app_id)
-            res = client.query(input)
-            answer = next(res.results).text
-            print answer
-            espeak.synth("The answer is"+answer)
-        except:
-            #wikipedia
-            input = input.split('')
-            input = " ".join(input[2:])
-            espeak.synth("Searched for" +input)
-            print wikipedia.summary(input)
+                print("Could not request results from Google Soeech Recognition Service; {0}".format(e))
+
+        else:
+            try:
+                #wolframalpha
+                app_id = ""
+                client = wolframalpha.Client(app_id)
+                res = client.query(input)
+                answer = next(res.results).text
+                print answer
+                espeak.synth("The answer is"+answer)
+            except:
+                #wikipedia
+                input = input.split('')
+                input = " ".join(input[2:])
+                espeak.synth("Searched for" +input)
+                print wikipedia.summary(input)
 
 
 if __name__ == "__main__":
